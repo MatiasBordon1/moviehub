@@ -1,0 +1,18 @@
+{% extends "movies/base.html" %}
+
+{% block content %}
+  <div class="container mt-5">
+    <h2 class="mb-4 text-center">📝 {{ form.instance.pk|yesno:"Editar Comentario,Nuevo Comentario" }}</h2>
+
+    <form method="post" class="card p-4 shadow-sm mx-auto" style="max-width: 600px;">
+      {% csrf_token %}
+      <div class="form-group mb-3">
+        {{ form.content.label_tag }}
+        {{ form.content }}
+      </div>
+
+      <button type="submit" class="btn btn-primary">💾 Guardar</button>
+      <a href="{% url 'favorite_list' %}" class="btn btn-secondary ms-2">🔙 Cancelar</a>
+    </form>
+  </div>
+{% endblock %}

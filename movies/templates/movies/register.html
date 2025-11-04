@@ -1,0 +1,13 @@
+{% extends 'movies/base.html' %}
+
+{% block content %}
+  <h2 class="mb-4">📝 Registro</h2>
+
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Registrarse</button>
+  </form>
+
+  <p class="mt-3">¿Ya tenés cuenta? <a href="{% url 'login' %}">Iniciar sesión</a></p>
+{% endblock %}

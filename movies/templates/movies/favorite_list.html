@@ -1,0 +1,55 @@
+{% extends "movies/base.html" %}
+
+{% block content %}
+  <div class="container mt-4">
+    <h1 class="mb-4 text-center">❤️ Mis Películas Favoritas</h1>
+
+    {% if favorites %}
+      <div class="row row-cols-1 row-cols-md-2 g-4">
+        {% for movie in favorites %}
+          <div class="col">
+            <div class="card shadow-sm h-100">
+              <div class="row g-0 h-100">
+                <div class="col-md-4">
+                  <img src="{{ movie.poster_url|default:'https://via.placeholder.com/150x225?text=Sin+Poster' }}"
+                       class="img-fluid rounded-start h-100 object-fit-cover"
+                       alt="{{ movie.title }}">
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body d-flex flex-column justify-content-between h-100">
+                    <div>
+                      <h5 class="card-title">{{ movie.title }} ({{ movie.release_date|slice:":4" }})</h5>
+                      <p class="card-text"><strong>Puntaje:</strong> {{ movie.rating }}</p>
+                      <p class="card-text text-muted small">{{ movie.overview }}</p>
+                    </div>
+
+                    <form method="post" action="{% url 'favorite_delete' movie.pk %}" class="mt-2">
+                      {% csrf_token %}
+                      <button type="submit" class="btn btn-danger btn-sm w-100">
+                        🗑 Eliminar de Favoritas
+                      </button>
+                    </form>
+
+                    {% if movie.comment %}
+                      <div class="mt-2 alert alert-light p-2 small">
+                        <strong>Comentario:</strong> {{ movie.comment.content }}
+                        <div class="mt-1">
+                          <a href="{% url 'comment_update' movie.comment.pk %}" class="btn btn-outline-secondary btn-sm me-1">✏️ Editar</a>
+                          <a href="{% url 'comment_delete' movie.comment.pk %}" class="btn btn-outline-danger btn-sm">🗑 Borrar</a>
+                        </div>
+                      </div>
+                    {% else %}
+                      <a href="{% url 'comment_create' movie.pk %}" class="btn btn-outline-primary btn-sm mt-2 w-100">📝 Agregar Comentario</a>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p class="text-center text-muted">Todavía no agregaste ninguna película a tus favoritas.</p>
+    {% endif %}
+  </div>
+{% endblock %}
