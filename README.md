@@ -26,3 +26,34 @@
 - **TMDB API** para la búsqueda de películas
 
 ---
+
+## 📦 Instalación local
+
+Clonar el repositorio:
+git clone https://github.com/TU_USUARIO/moviehub.git
+cd moviehub
+
+
+Crear y activar entorno virtual:
+python -m venv env
+source env/bin/activate  # En Windows: env\Scripts\activate
+
+
+Instalar dependencias:
+pip install -r requirements.txt
+
+
+Crear archivo .env y definir tu clave de TMDB:
+TMDB_API_KEY=tu_clave_api
+
+
+Ejecutar migraciones:
+python manage.py migrate
+
+
+Correr el servidor:
+python manage.py runserver
+
+
+Autor:
+Matías Bordon
