@@ -3,11 +3,11 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class FavoriteMovie(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)  # 🔥 NUEVO
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     tmdb_id = models.IntegerField()
     title = models.CharField(max_length=200)
     overview = models.TextField()
-    poster_url = models.URLField(blank=True, null=True)  # ✅ AHORA PERMITE NULL
+    poster_url = models.URLField(blank=True, null=True)
     release_date = models.CharField(max_length=10, blank=True)
     genre_ids = models.CharField(max_length=200, blank=True)
     rating = models.FloatField()
